@@ -1,0 +1,170 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "Ethan",
+      "password": "1000:136da12ddaaafa985d39635c37231a53:cf6567bdf7db7797ab0b9dae437e1e80f03a7a678c35b98dd1b93e97c14b2017cd178ab9224d7e392ffbda433c8e2b5dd4fea46d4e9f86d3",
+      "bio": "Test",
+      "profilePicture": 1,
+      "followers": [
+        2,
+        3
+      ],
+      "followings": [
+        3
+      ],
+      "posts": [
+        1,
+        2,
+        4
+      ]
+    },
+    {
+      "id": 2,
+      "username": "Test",
+      "password": "1000:fe99ca3fee88912669ff5ffcc88aaa26:8c1a124e326638674031d18c3103e05b523439a4b8aebae44a44d5e7c54b0573887da562e8b19e2edd9e10248f521d074fa9ccbfa4e7f3ec",
+      "bio": "My Bio",
+      "profilePicture": 4,
+      "followers": [],
+      "followings": [
+        1
+      ],
+      "posts": []
+    },
+    {
+      "id": 3,
+      "username": "Perry",
+      "password": "1000:795026360789218fda34a6c3f134230e:921417ba09978cd34b5ae39b6fd766dbf04ed750adc3bea9761c06e54c4c6efcdcc72880f9e90af6854b4e5f5983396fabbc729cc012ea2d",
+      "bio": "The platypus",
+      "profilePicture": 5,
+      "followers": [
+        1
+      ],
+      "followings": [
+        1
+      ],
+      "posts": [
+        3
+      ]
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "author": 1,
+      "title": "Incognito",
+      "content": 2,
+      "likes": [
+        2
+      ]
+    },
+    {
+      "id": 2,
+      "author": 1,
+      "title": "Another One",
+      "content": 3,
+      "likes": [
+        2,
+        3
+      ]
+    },
+    {
+      "id": 3,
+      "author": 3,
+      "title": "My home",
+      "content": 6,
+      "likes": [
+        1
+      ]
+    },
+    {
+      "id": 4,
+      "author": 1,
+      "title": "Enter a caption",
+      "content": 7,
+      "likes": []
+    }
+  ],
+  "pictures": [
+    {
+      "id": 1,
+      "filePath": "src\\main\\resources\\img\\storage\\profile\\Chad Baby.jpg"
+    },
+    {
+      "id": 2,
+      "filePath": "src\\main\\resources\\img\\storage\\uploaded\\MSV Incognito Logo.jpeg"
+    },
+    {
+      "id": 3,
+      "filePath": "src\\main\\resources\\img\\storage\\uploaded\\Capture.JPG"
+    },
+    {
+      "id": 4,
+      "filePath": "src\\main\\resources\\img\\storage\\profile\\Doofenshmirtz But Better.jpg"
+    },
+    {
+      "id": 5,
+      "filePath": "src\\main\\resources\\img\\storage\\profile\\Doofenshmirtz But Better.jpg"
+    },
+    {
+      "id": 6,
+      "filePath": "src\\main\\resources\\img\\storage\\uploaded\\Weynon Priory Oblivion.jpg"
+    },
+    {
+      "id": 7,
+      "filePath": "src\\main\\resources\\img\\storage\\uploaded\\MSV Incognito Logo.jpeg"
+    }
+  ],
+  "notifications": [
+    {
+      "id": 1,
+      "target": 1,
+      "message": "Test Liked Your Post!"
+    },
+    {
+      "id": 2,
+      "target": 1,
+      "message": "Test Liked Your Post!"
+    },
+    {
+      "id": 3,
+      "target": 1,
+      "message": "Test Liked Your Post!"
+    },
+    {
+      "id": 4,
+      "target": 1,
+      "message": "Test Followed You!"
+    },
+    {
+      "id": 5,
+      "target": 1,
+      "message": "Perry Liked Your Post!"
+    },
+    {
+      "id": 6,
+      "target": 1,
+      "message": "Perry Followed You!"
+    },
+    {
+      "id": 7,
+      "target": 3,
+      "message": "Ethan Liked Your Post!"
+    },
+    {
+      "id": 8,
+      "target": 3,
+      "message": "Ethan Liked Your Post!"
+    },
+    {
+      "id": 9,
+      "target": 3,
+      "message": "Ethan Followed You!"
+    },
+    {
+      "id": 10,
+      "target": 3,
+      "message": "Ethan Followed You!"
+    }
+  ]
+}
