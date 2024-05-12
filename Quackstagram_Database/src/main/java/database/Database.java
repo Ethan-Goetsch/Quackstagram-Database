@@ -67,6 +67,12 @@ public class Database
         }
     }
 
+    public static<T> T executeQueryAndReadResult(ResultQueryObject<T> query)
+    {
+        var resultSet = query.executeQuery(getConnection());
+        return query.readResult(resultSet);
+    }
+
     public static ResultSet executeQuery(QueryObject query)
     {
         return query.executeQuery(getConnection());

@@ -1,13 +1,15 @@
 package database.queries.get;
 
 import database.Database;
-import database.DatabaseExtensions;
-import database.queries.QueryObject;
+import database.queries.ResultQueryObject;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
-public class GetAllFollowersForUserQuery extends QueryObject
+public class GetAllFollowersForUserQuery extends ResultQueryObject<List<Integer>>
 {
     private final int id;
 
@@ -20,7 +22,7 @@ public class GetAllFollowersForUserQuery extends QueryObject
     public String getStatement()
     {
         return "SELECT source_id " +
-                "FROM quackstagram.user" +
+                "FROM quackstagram.user_relationship " +
                 "WHERE destination_id = ?";
     }
 
@@ -30,9 +32,24 @@ public class GetAllFollowersForUserQuery extends QueryObject
         statement.setInt(1, id);
     }
 
+    @Override
+    public List<Integer> readResult(ResultSet resultSet)
+    {
+        try
+        {
+            var followers = new ArrayList<Integer>();
+            while (resultSet.next())
+                followers.add(resultSet.getInt(1));
+            return followers;
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static void main(String[] args)
     {
-        var result = Database.executeQuery(new GetAllFollowersForUserQuery(0));
-        DatabaseExtensions.printAllData(result);
+        System.out.println(Database.executeQueryAndReadResult(new GetAllFollowersForUserQuery(1)));
     }
 }
