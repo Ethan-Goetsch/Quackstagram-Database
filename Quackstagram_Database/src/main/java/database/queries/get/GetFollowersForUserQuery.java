@@ -15,7 +15,7 @@ public class GetFollowersForUserQuery extends QueryObject
 
     public static void main(String[] args)
     {
-        var result = Database.executeStatement(new GetAllUserQuery());
+        var result = Database.executeQuery(new GetAllUserQuery());
         DatabaseExtensions.printAllData(result);
     }
 }

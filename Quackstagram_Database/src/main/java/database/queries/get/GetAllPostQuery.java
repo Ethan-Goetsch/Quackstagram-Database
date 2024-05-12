@@ -15,7 +15,7 @@ public class GetAllPostQuery extends QueryObject
 
     public static void main(String[] args)
     {
-        var result = Database.executeStatement(new GetAllPostQuery());
+        var result = Database.executeQuery(new GetAllPostQuery());
         DatabaseExtensions.printAllData(result);
     }
 }

@@ -15,7 +15,7 @@ public class GetAllNotificationQuery extends QueryObject
 
     public static void main(String[] args)
     {
-        var result = Database.executeStatement(new GetAllNotificationQuery());
+        var result = Database.executeQuery(new GetAllNotificationQuery());
         DatabaseExtensions.printAllData(result);
     }
 }

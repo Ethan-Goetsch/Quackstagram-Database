@@ -49,12 +49,12 @@ public class Database
         return model;
     }
 
-    public static boolean executeQuery(QueryObject query)
+    public static boolean execute(QueryObject query)
     {
-        return executeQuery(query.getStatement());
+        return query.execute(getConnection());
     }
 
-    public static boolean executeQuery(String query)
+    public static boolean execute(String query)
     {
         try
         {
@@ -67,12 +67,12 @@ public class Database
         }
     }
 
-    public static ResultSet executeStatement(QueryObject query)
+    public static ResultSet executeQuery(QueryObject query)
     {
-        return executeStatement(query.getStatement());
+        return query.executeQuery(getConnection());
     }
 
-    public static ResultSet executeStatement(String query)
+    public static ResultSet executeQuery(String query)
     {
         try
         {
@@ -128,128 +128,42 @@ public class Database
 
     public static void insertUser(User user)
     {
-        try
-        {
-            var preparedStatement = getConnection().prepareStatement(new InsertUserQuery().getStatement());
-            preparedStatement.setInt(1, user.id());
-            preparedStatement.setString(2, user.username());
-            preparedStatement.setString(3, user.password());
-            preparedStatement.setString(4, user.bio());
-            preparedStatement.setInt(5, user.profilePicture().id());
-            preparedStatement.execute();
-        }
-        catch (SQLException e)
-        {
-            throw new RuntimeException(e);
-        }
+        execute(new InsertUserQuery(user));
     }
 
     public static void insertPost(Post post)
     {
-        try
-        {
-            var preparedStatement = getConnection().prepareStatement(new InsertPostQuery().getStatement());
-            preparedStatement.setInt(1, post.id());
-            preparedStatement.setInt(2, post.author().id());
-            preparedStatement.setInt(3, post.content().id());
-            preparedStatement.setString(4, post.title());
-            preparedStatement.execute();
-        }
-        catch (SQLException e)
-        {
-            throw new RuntimeException(e);
-        }
+        execute(new InsertPostQuery(post));
     }
 
     public static void insertPicture(Picture picture)
     {
-        try
-        {
-            var preparedStatement = getConnection().prepareStatement(new InsertPictureQuery().getStatement());
-            preparedStatement.setInt(1, picture.id());
-            preparedStatement.setString(2, picture.pathFile());
-            preparedStatement.execute();
-        }
-        catch (SQLException e)
-        {
-            throw new RuntimeException(e);
-        }
+        execute(new InsertPictureQuery(picture));
     }
 
     public static void insertNotification(Notification notification)
     {
-        try
-        {
-            var preparedStatement = getConnection().prepareStatement(new InsertNotificationQuery().getStatement());
-            preparedStatement.setInt(1, notification.id());
-            preparedStatement.setInt(2, notification.target().id());
-            preparedStatement.setString(3, notification.message());
-            preparedStatement.execute();
-        }
-        catch (SQLException e)
-        {
-            throw new RuntimeException(e);
-        }
+        execute(new InsertNotificationQuery(notification));
     }
 
     public static void insertUserRelationship(User source, User destination)
     {
-        try
-        {
-            var preparedStatement = getConnection().prepareStatement(new InsertUserRelationshipQuery().getStatement());
-            preparedStatement.setInt(1, source.id());
-            preparedStatement.setInt(2, destination.id());
-            preparedStatement.execute();
-        }
-        catch (SQLException e)
-        {
-            throw new RuntimeException(e);
-        }
+        execute(new InsertUserRelationshipQuery(source, destination));
     }
 
     public static void deleteUserRelationship(User source, User destination)
     {
-        try
-        {
-            var preparedStatement = getConnection().prepareStatement(new DeleteUserRelationshipQuery().getStatement());
-            preparedStatement.setInt(1, source.id());
-            preparedStatement.setInt(2, destination.id());
-            preparedStatement.execute();
-        }
-        catch (SQLException e)
-        {
-            throw new RuntimeException(e);
-        }
+        execute(new DeleteUserRelationshipQuery(source, destination));
     }
 
     public static void insertPostRelationship(User user, Post post)
     {
-        try
-        {
-            var preparedStatement = getConnection().prepareStatement(new InsertPostRelationshipQuery().getStatement());
-            preparedStatement.setInt(1, user.id());
-            preparedStatement.setInt(2, post.id());
-            preparedStatement.execute();
-        }
-        catch (SQLException e)
-        {
-            throw new RuntimeException(e);
-        }
+        execute(new InsertPostRelationshipQuery(user, post));
     }
 
     public static void deletePostRelationship(User user, Post post)
     {
-        try
-        {
-            var preparedStatement = getConnection().prepareStatement(new DeletePostRelationshipQuery().getStatement());
-            preparedStatement.setInt(1, user.id());
-            preparedStatement.setInt(2, post.id());
-            preparedStatement.execute();
-        }
-        catch (SQLException e)
-        {
-            throw new RuntimeException(e);
-        }
+        execute(new DeletePostRelationshipQuery(user, post));
     }
 
     public static void saveDataToFile()
@@ -277,8 +191,7 @@ public class Database
 
     public static DatabaseModel loadDataFromDatabase()
     {
-        var data = new EntityData();
-        return DataAdapter.toModel(data);
+        return DataAdapter.toModel(EntityDataLoader.loadDataFromDatabase());
     }
 
     public static DatabaseModel loadDataFromFile()

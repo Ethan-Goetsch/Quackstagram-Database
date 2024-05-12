@@ -15,7 +15,7 @@ public class GetAllPictureQuery extends QueryObject
 
     public static void main(String[] args)
     {
-        var result = Database.executeStatement(new GetAllPictureQuery());
+        var result = Database.executeQuery(new GetAllPictureQuery());
         DatabaseExtensions.printAllData(result);
     }
 }
