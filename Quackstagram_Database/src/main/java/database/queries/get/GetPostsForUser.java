@@ -9,11 +9,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetFollowersForUserQuery extends ResultQueryObject<List<Integer>>
+public class GetPostsForUser extends ResultQueryObject<List<Integer>>
 {
     private final int id;
 
-    public GetFollowersForUserQuery(int id)
+    public GetPostsForUser(int id)
     {
         this.id = id;
     }
@@ -21,9 +21,9 @@ public class GetFollowersForUserQuery extends ResultQueryObject<List<Integer>>
     @Override
     public String getStatement()
     {
-        return "SELECT source_id " +
-                "FROM quackstagram.user_relationship " +
-                "WHERE destination_id = ?";
+        return "SELECT post_id " +
+                "FROM quackstagram.post " +
+                "WHERE author_id = ?";
     }
 
     @Override
@@ -37,10 +37,10 @@ public class GetFollowersForUserQuery extends ResultQueryObject<List<Integer>>
     {
         try
         {
-            var followers = new ArrayList<Integer>();
+            var posts = new ArrayList<Integer>();
             while (resultSet.next())
-                followers.add(resultSet.getInt(1));
-            return followers;
+                posts.add(resultSet.getInt(1));
+            return posts;
         }
         catch (SQLException e)
         {
@@ -50,6 +50,6 @@ public class GetFollowersForUserQuery extends ResultQueryObject<List<Integer>>
 
     public static void main(String[] args)
     {
-        System.out.println(Database.executeQueryAndReadResult(new GetFollowersForUserQuery(1)));
+        System.out.println(Database.executeQueryAndReadResult(new GetPostsForUser(0)));
     }
 }

@@ -23,9 +23,15 @@ public class CredentialsValidator
     public boolean isCredentialsValid(String username, String password)
     {
         // valid if a user exits with the provided password
-        return Database
+            return Database
                 .getUser(username)
-                .map(user -> EncryptionController.validate(password, user.password()))
+                .map(user -> user.password().equals(password))
                 .orElse(false);
+
+        // For Password Encryption that is not used with the Database since I do not want to manually encrypt the generated data
+//        return Database
+//                .getUser(username)
+//                .map(user -> EncryptionController.validate(password, user.password()))
+//                .orElse(false);
     }
 }

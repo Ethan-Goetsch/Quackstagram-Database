@@ -136,7 +136,7 @@ public class DataAdapter
         var likes = post.likes().stream()
                 .map(User::id)
                 .toList();
-        return new PostData(post.id(), post.author().id(), post.title(), post.content().id(), likes);
+        return new PostData(post.id(), post.author().id(), post.content().id(), post.title(), likes);
     }
 
     private static PictureData toData(Picture picture)
