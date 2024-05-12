@@ -5,7 +5,6 @@ import entities.User;
 import ui.UIController;
 import ui.events.NavigationEvent;
 import ui.events.UserClickedEvent;
-import ui.factory.QuackstagramUIFactory;
 import ui.factory.UIFactory;
 
 import javax.imageio.ImageIO;
@@ -100,7 +99,7 @@ public class ExplorePage extends QuackstagramPage
 
         // Read image details
         String username = post.author().username();
-        String title = post.getTitle();
+        String title = post.title();
         String likes = String.valueOf(post.likes().size());
 
         // Top panel for username and time since posting

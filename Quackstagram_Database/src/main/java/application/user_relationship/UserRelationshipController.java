@@ -18,7 +18,8 @@ public class UserRelationshipController
         source.followings().add(destination);
         destination.followers().add(source);
 
-        Database.saveData();
+        Database.insertUserRelationship(source, destination);
+        //Database.saveDataToFile();
         onEvent.onNext(new FollowEvent(source, destination));
     }
 
@@ -30,7 +31,8 @@ public class UserRelationshipController
         source.followings().remove(destination);
         destination.followers().remove(source);
 
-        Database.saveData();
+        Database.deleteUserRelationship(source, destination);
+        //Database.saveDataToFile();
         onEvent.onNext(new UnfollowEvent(source, destination));
     }
 

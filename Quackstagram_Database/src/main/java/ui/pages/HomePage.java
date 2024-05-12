@@ -4,7 +4,6 @@ import entities.Post;
 import ui.UIController;
 import ui.events.LikePostEvent;
 import ui.events.NavigationEvent;
-import ui.factory.QuackstagramUIFactory;
 import ui.factory.UIFactory;
 
 import javax.swing.*;
@@ -59,7 +58,7 @@ public class HomePage extends QuackstagramPage
     private void displayPost(JPanel panel, Post post)
     {
         var author = post.author().username();
-        var description = post.getTitle();
+        var description = post.title();
         var likes = String.valueOf(post.likes().size());
 
         JPanel itemPanel = factory.createItemPanel();

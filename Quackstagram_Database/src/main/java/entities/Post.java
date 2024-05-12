@@ -32,7 +32,7 @@ public class Post
         return id;
     }
 
-    public String getTitle()
+    public String title()
     {
         return title;
     }

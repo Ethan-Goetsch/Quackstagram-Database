@@ -3,6 +3,7 @@ package util;
 public class PathFile
 {
     public static final String DataFile = "src/main/resources/data.txt";
+    public static final String CREDENTIALS_FILE = "src/main/resources/credentials.txt";
 
     public static final String ProfilePictureFolder = "src/main/resources/img/storage/profile/";
     public static final String UploadPictureFolder = "src/main/resources/img/storage/uploaded/";

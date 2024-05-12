@@ -111,7 +111,7 @@ public class QuackstagramUIFactory extends UIFactory
     {
         JPanel infoPanel = new JPanel();
         infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
-        infoPanel.add(new JLabel(post.getTitle())); // Description
+        infoPanel.add(new JLabel(post.title())); // Description
         infoPanel.add(new JLabel(String.valueOf(post.likes().size()))); // Likes
         return infoPanel;
     }

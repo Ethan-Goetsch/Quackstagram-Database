@@ -17,7 +17,8 @@ public class PostRelationshipController
         if (post.likes().contains(user)) return;
 
         post.likes().add(user);
-        Database.saveData();
+        Database.insertPostRelationship(user, post);
+        //Database.saveDataToFile();
         onEvent.onNext(new LikePostEvent(user, post));
     }
 
@@ -27,7 +28,8 @@ public class PostRelationshipController
         if (!post.likes().contains(user)) return;
 
         post.likes().remove(user);
-        Database.saveData();
+        Database.deletePostRelationship(user, post);
+        //Database.saveDataToFile();
         onEvent.onNext(new UnlikePostEvent(user, post));
     }
 
