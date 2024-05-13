@@ -43,6 +43,20 @@ INSERT INTO `comment` VALUES (1,1,1,'Behold the arcane secrets unveiled!','2024-
 UNLOCK TABLES;
 
 --
+-- Temporary view structure for view `content_popularity`
+--
+
+DROP TABLE IF EXISTS `content_popularity`;
+/*!50001 DROP VIEW IF EXISTS `content_popularity`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `content_popularity` AS SELECT 
+ 1 AS `post_id`,
+ 1 AS `like_count`,
+ 1 AS `comment_count`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Table structure for table `notification`
 --
 
@@ -143,6 +157,19 @@ INSERT INTO `post_relationship` VALUES (1,2),(1,3),(1,5),(1,17),(2,4),(3,7),(4,2
 UNLOCK TABLES;
 
 --
+-- Temporary view structure for view `system_analytics`
+--
+
+DROP TABLE IF EXISTS `system_analytics`;
+/*!50001 DROP VIEW IF EXISTS `system_analytics`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `system_analytics` AS SELECT 
+ 1 AS `post_date`,
+ 1 AS `posts_count`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Table structure for table `user`
 --
 
@@ -170,6 +197,20 @@ INSERT INTO `user` VALUES (1,'elvenarcher','bowandarrow123','Protector of the en
 UNLOCK TABLES;
 
 --
+-- Temporary view structure for view `user_behaviour`
+--
+
+DROP TABLE IF EXISTS `user_behaviour`;
+/*!50001 DROP VIEW IF EXISTS `user_behaviour`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `user_behaviour` AS SELECT 
+ 1 AS `user_id`,
+ 1 AS `followers_count`,
+ 1 AS `followings_count`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Table structure for table `user_relationship`
 --
 
@@ -192,10 +233,175 @@ LOCK TABLES `user_relationship` WRITE;
 INSERT INTO `user_relationship` VALUES (1,2),(1,3),(1,18),(2,4),(2,5),(3,6),(4,7),(5,8),(6,9),(7,10),(8,11),(9,12),(10,13),(11,14),(12,15),(13,16),(14,17),(15,18),(16,19),(17,20),(18,1);
 /*!40000 ALTER TABLE `user_relationship` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `update_user_relationship_history_insert` AFTER INSERT ON `user_relationship` FOR EACH ROW call update_user_relationship_history(new.source_id, new.destination_id, 1, now()) */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `update_user_relationship_history_delete` AFTER DELETE ON `user_relationship` FOR EACH ROW call update_user_relationship_history(old.source_id, old.destination_id, 0, now()) */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Table structure for table `user_relationship_history`
+--
+
+DROP TABLE IF EXISTS `user_relationship_history`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `user_relationship_history` (
+  `follow_history_id` int NOT NULL AUTO_INCREMENT,
+  `source_id` int DEFAULT NULL,
+  `destination_id` int DEFAULT NULL,
+  `followed` tinyint(1) DEFAULT NULL,
+  `relationship_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`follow_history_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_relationship_history`
+--
+
+LOCK TABLES `user_relationship_history` WRITE;
+/*!40000 ALTER TABLE `user_relationship_history` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_relationship_history` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Dumping routines for database 'quackstagram'
 --
+/*!50003 DROP FUNCTION IF EXISTS `get_all_users` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `get_all_users`() RETURNS decimal(5,2)
+    DETERMINISTIC
+return (select Count(user_id) from user) ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `get_follow_history` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_follow_history`(user_id int)
+select source_id as user, destination_id as user_followed, followed
+from user_relationship_history
+where source_id = user_id ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `update_user_relationship_history` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_user_relationship_history`(source_id int, destination_id int, followed bool, date_time datetime)
+insert into user_relationship_history (source_id, destination_id, followed, relationship_date)
+	values (source_id, destination_id, followed, date_time) ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Final view structure for view `content_popularity`
+--
+
+/*!50001 DROP VIEW IF EXISTS `content_popularity`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `content_popularity` AS select `p`.`post_id` AS `post_id`,coalesce(`l`.`like_count`,0) AS `like_count`,coalesce(`c`.`comment_count`,0) AS `comment_count` from ((`post` `p` left join (select `post_relationship`.`post_id` AS `post_id`,count(`post_relationship`.`user_id`) AS `like_count` from `post_relationship` group by `post_relationship`.`post_id`) `l` on((`p`.`post_id` = `l`.`post_id`))) left join (select `comment`.`post_id` AS `post_id`,count(`comment`.`comment_id`) AS `comment_count` from `comment` group by `comment`.`post_id`) `c` on((`p`.`post_id` = `c`.`post_id`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `system_analytics`
+--
+
+/*!50001 DROP VIEW IF EXISTS `system_analytics`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `system_analytics` AS select `post`.`publication_date` AS `post_date`,count(`post`.`post_id`) AS `posts_count` from `post` group by `post`.`publication_date` having (count(`post`.`post_id`) >= 2) order by `post_date` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `user_behaviour`
+--
+
+/*!50001 DROP VIEW IF EXISTS `user_behaviour`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `user_behaviour` AS select `u`.`user_id` AS `user_id`,coalesce(`r`.`followers_count`,0) AS `followers_count`,coalesce(`f`.`followings_count`,0) AS `followings_count` from (((select distinct `user`.`user_id` AS `user_id` from `user`) `u` left join (select `ur2`.`destination_id` AS `destination_id`,count(`ur2`.`destination_id`) AS `followers_count` from `user_relationship` `ur2` group by `ur2`.`destination_id`) `r` on((`u`.`user_id` = `r`.`destination_id`))) left join (select `ur`.`source_id` AS `source_id`,count(`ur`.`source_id`) AS `followings_count` from `user_relationship` `ur` group by `ur`.`source_id`) `f` on((`u`.`user_id` = `f`.`source_id`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -206,4 +412,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-12 18:15:44
+-- Dump completed on 2024-05-13 10:09:17
