@@ -1,0 +1,22 @@
+|comment_id|post_id|user_id|message                                               |publication_date   |
+|----------|-------|-------|------------------------------------------------------|-------------------|
+|1         |1      |1      |Behold the arcane secrets unveiled!                   |2024-05-01 00:00:00|
+|2         |2      |2      |A true masterpiece of eldritch lore.                  |2024-05-02 00:00:00|
+|3         |3      |3      |Such a mystical journey through the enchanted woods.  |2024-05-03 00:00:00|
+|4         |4      |4      |This potion recipe has transformed my brew!           |2024-05-04 00:00:00|
+|5         |5      |5      |The dragon’s flight was depicted with fiery passion!  |2024-05-05 00:00:00|
+|6         |6      |6      |Your tale of the orc warlord was truly gripping.      |2024-05-06 00:00:00|
+|7         |7      |7      |The song of the siren echoed deep within my soul.     |2024-05-07 00:00:00|
+|8         |8      |8      |A treasure map that leads to ancient mysteries!       |2024-05-08 00:00:00|
+|9         |9      |9      |The shadows of the vampire castle were chilling.      |2024-05-09 00:00:00|
+|10        |10     |10     |The lore of the ancient scrolls is enlightening.      |2024-05-10 00:00:00|
+|11        |11     |11     |A giants tale that shakes the very earth!             |2024-05-11 00:00:00|
+|12        |12     |12     |Bewitched by the witch’s latest concoction.           |2024-05-12 00:00:00|
+|13        |13     |13     |Your chronicle of the phoenix rebirth is inspiring.   |2024-05-01 00:00:00|
+|14        |14     |14     |The griffin’s majesty was captured splendidly.        |2024-05-02 00:00:00|
+|15        |15     |15     |The leprechauns tricks added a spark of mischief!     |2024-05-03 00:00:00|
+|16        |16     |16     |Your exploration of the deep sea kraken was thrilling.|2024-05-04 00:00:00|
+|17        |17     |17     |The centaur’s charge was a rush of adrenaline.        |2024-05-05 00:00:00|
+|18        |18     |18     |Mermaid tales from the deep blue are captivating.     |2024-05-06 00:00:00|
+|19        |19     |19     |Your depiction of the trolls bridge was spot-on.      |2024-05-07 00:00:00|
+|20        |20     |20     |Goblins and their mischief never cease to amuse!      |2024-05-08 00:00:00|

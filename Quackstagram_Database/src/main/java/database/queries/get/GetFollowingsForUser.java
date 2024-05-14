@@ -44,7 +44,8 @@ public class GetFollowingsForUser extends ResultQueryObject<List<Integer>>
         }
         catch (SQLException e)
         {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            return new ArrayList<>();
         }
     }
 

@@ -36,7 +36,8 @@ public class GetAllPostQuery extends ResultQueryObject<List<PostData>>
         }
         catch (SQLException e)
         {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            return new ArrayList<>();
         }
     }
 

@@ -44,7 +44,8 @@ public class GetPostsForUser extends ResultQueryObject<List<Integer>>
         }
         catch (SQLException e)
         {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            return new ArrayList<>();
         }
     }
 

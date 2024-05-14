@@ -39,7 +39,8 @@ public class GetAllNotificationQuery extends ResultQueryObject<List<Notification
         }
         catch (SQLException e)
         {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            return new ArrayList<>();
         }
     }
 }

@@ -37,7 +37,8 @@ public class GetAllUserQuery extends ResultQueryObject<List<UserData>>
         }
         catch (SQLException e)
         {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            return new ArrayList<>();
         }
     }
 

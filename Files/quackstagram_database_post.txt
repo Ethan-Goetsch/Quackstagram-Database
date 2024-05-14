@@ -1,0 +1,7 @@
+|post_id|author_id|picture_id|title                      |publication_date   |
+|-------|---------|----------|---------------------------|-------------------|
+|1      |1        |1         |The Hidden Glade           |2024-05-02 00:00:00|
+|2      |2        |2         |Secrets of the Arcane      |2024-05-11 00:00:00|
+|3      |3        |3         |An Ode to the Forge        |2024-05-01 00:00:00|
+|4      |4        |4         |Magic in the Moonlight     |2024-05-06 00:00:00|
+|5      |5        |5         |Flight of the Dragons      |2024-05-03 00:00:00|
